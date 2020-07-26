@@ -1,58 +1,52 @@
-%\documentclass[11pt,a4paper]{jsarticle}
-%\documentclass[a4paper,twocolumn,uplatex,dvipdfmx]{bxjsarticle}
-\documentclass[a4paper,uplatex,dvipdfm]{bxjsarticle}
+\documentclass[uplatex,jis2004,a4paper]{jsarticle}
+\usepackage[deluxe]{otf}
 
-\usepackage{amsmath}
-\usepackage[dvipdfmx,hidelinks]{hyperref}
-\usepackage{pxjahyper}
+%%% 余白設定
+\usepackage[top=3cm, bottom=3cm, left=2cm, right=2cm]{geometry}
 
-\usepackage{pxbase}
-\usepackage[bxutf8]{inputenc}
-\usepackage[uplatex,deluxe,expert]{otf}
+%%% フォント設定
+\usepackage[alphabet,unicode]{pxchfon}
+\setminchofont[0]{UDDigiKyokashoN-R.ttc}% UDデジタル教科書体N-R
+\setboldminchofont[0]{UDDigiKyokashoN-B.ttc}% UDデジタル教科書体N-B
+
+\usepackage{amssymb,amsmath}
+%\usepackage[dvipdfmx,hidelinks]{hyperref}
+\usepackage{hyperref}
 
 \usepackage{enumitem}
 \setlist{leftmargin=5mm}
+\renewcommand{\labelitemi}{$\triangleright$}
+\renewcommand{\labelitemii}{$\blacktriangleright$}
 
-%%% title のフォント設定
-\makeatletter
-\renewcommand{\title}[1]{\gdef\@title{\bfseries\rmfamily#1}}
-\makeatother
+\usepackage{multicol}
 
 %%% section のフォント設定
-%\makeatletter
-%\renewcommand{\headfont}{\rmfamily\bfseries}
-%\makeatother
-%\usepackage{titlesec}
-%\titleformat*{\section}{\large\bfseries}
-%\renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
 \usepackage{titlesec}
-\titleformat{\section}
-  {\normalfont\rmfamily\Large\bfseries}
+\titleformat{\section}{\Large\bfseries}
   {\thesection}{1em}
   {}
   [\titlerule]
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
 
-%
-%\setlength{\textwidth}{\fullwidth}
-%\setlength{\textheight}{40\baselineskip}
-%\addtolength{\textheight}{\topskip}
-%\setlength{\voffset}{-0.2in}
-%\setlength{\topmargin}{0pt}
-%\setlength{\headheight}{0pt}
-%\setlength{\headsep}{0pt}
+\renewcommand{\emph}[1]{\textbf{#1}}
+
 \pagestyle{empty}
-%
+
 \title{計算情報学研究室}
 %\author{深川 大路 (Fukagawa, Daiji)}
 \date{}
 
+
+
 \begin{document}
 
-\begin{minipage}[t]{.45\textwidth}
+\begin{minipage}[t]{.5\textwidth}
 \noindent
-{\Huge\bfseries\rmfamily 計算情報学研究室}
+{\Huge\bfseries\rmfamily ㉘ 計算情報学研究室}\\
+\hspace{1cm} Computational Informatics Laboratory
 \end{minipage}
-\begin{minipage}[t]{.50\textwidth}
+\begin{minipage}[t]{.45\textwidth}
 \begin{tabular}{ll}
 担当教員: & 深川 大路 (FUKAGAWA Daiji) \\
 e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
@@ -64,12 +58,12 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
 
 \section{教員について}
 
-専門分野は{\sffamily\bfseries アルゴリズムと計算量の理論}，特に，{\sffamily\bfseries 離散データのマッチング}です．
+専門分野は\emph{アルゴリズムと計算量の理論}，特に，\emph{離散データのマッチング}です．
 ざっくりと説明すると，アルゴリズムとは問題の解き方であり，計算量はそのアルゴリズムの効率を表す尺度のひとつであり，離散データは，文字列や木などの単純な構造を持つデータから，グラフとよばれる複雑なネットワーク構造を持つデータを含むものを指します．
 
 アルゴリズムを研究する最大の目的は，計算機 (computer) の処理を速くすることです．そのための手段として，アルゴリズムの計算量や問題の複雑さを数学的に解析したり，実際に計算機プログラムを実装したりといった作業を行います．
 
-一方で，講義・研究・その他の用務上の必要からプログラムを書くことも多く，その関係から，{\sffamily\bfseries 情報システムの開発}にも大いに興味があります．最近はこちらに重点を置くことが多くなっています．利用するプログラミング言語は最近では Python と JavaScript が多く，他にも C/C++, Java, Ruby などを使います．
+一方で，講義・研究・その他の用務上の必要からプログラムを書くことも多く，その関係から，\emph{情報システムの開発}にも大いに興味があります．最近はこちらに重点を置くことが多くなっています．利用するプログラミング言語は最近では Python と JavaScript が多く，他にも C/C++, Java, Ruby などを使います．
 
 \section{卒業研究について}
 
@@ -77,8 +71,15 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
 教員自身が抱えているテーマが自分の興味にマッチしていれば，それを選んでいただくこともオススメです．教員はモチベーションが上がります．ただし実際に卒業研究を行う皆さんにとってのモチベーションがないとお互いに困ります．
 
 \subsection*{過去の卒業研究題目（過去4期分）}
-\begin{minipage}[t]{.47\textwidth}
-{\footnotesize
+\vspace{-.5cm}
+\begin{multicols}{2}
+{\small
+\subsubsection*{2019年度}
+\begin{itemize}
+  \item 簡易宿所の戦略構築を支援するユーザレビュー分析におけるLDAの利用
+  \item 機械学習におけるOptimizerのAccuracyの比較分析
+  \item CNNとLSTMによる増減の2値分類予測の精度比較―為替データを用いて― 
+\end{itemize}
 \subsubsection*{2018年度}
 \begin{itemize}
   \item クロンダイクにおける成功可能性―探索の深さに着目して―
@@ -93,11 +94,6 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
   \item 梅田地下街におけるシミュレーションを用いた浸水被害予測
   \item 複数料理レシピにおける並行調理スケジュールの提案と評価
 \end{itemize}
-}
-\end{minipage}
-\hspace{.03\textwidth}
-\begin{minipage}[t]{.46\textwidth}
-{\footnotesize
 \subsubsection*{2014年度}
 \begin{itemize}
   \item マッシュアップ楽曲作成支援システムの構築に向けた基礎的検討
@@ -106,25 +102,23 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
     % 第9回 UECコンピュータ大貧民大会 ライト級 富豪 (第2位)
 \end{itemize}
 \vspace{-.4cm}
-\subsubsection*{2013年度}
-\begin{itemize}
-  \item 指の上げ下げに頑健な指の種類認識
-  \item 論文情報データベースを用いた研究トピックの可視化
-  \item 日本一周最短鉄道経路をめざして
-  \item 不完全情報ゲームにおける意思決定基準～こいこいを題材として～
-  \item トランプゲーム大貧民における切札の重要性
-  \item プレイヤーのスキルに応じたクリケットゲーム最適戦略の提案
-  \item 大学生の食事マナーを規定する要因の検討―しつけと食事環境に着目して―
-\end{itemize}
 }
-\end{minipage}
+\end{multicols}
 
+\clearpage
 \section{卒業研究の進め方}
 
-卒業研究は個人で行います．方向性や進捗を確認できるよう，{\sffamily\bfseries 全体ミーティング（毎週）}と{\sffamily\bfseries 個別ミーティング（随時）}を活用してください．人数が少ない年度は個別ミーティング中心とすることもあります．
+卒業研究は個人で行います．方向性や進捗を確認できるよう，\emph{全体ミーティング（毎週）}と\emph{個別ミーティング（随時）}を活用してください．人数が少ない年度は個別ミーティング中心，人数が多い年度は全体ミーティング
+中心となります．2020年度は卒研生を3つのゼミ（アルゴリズム，機械学習，情報システ
+ム）に分割してゼミ単位でミーティングを行っています．全体ミーティングの他に勉強会
+も開催しています．
 
-研究室に配属が決まったら，遠慮せずに研究室に来てください．先輩の様子を見て，話を聞いてみてください．卒業研究において必要なものは何か，考えてください．見る・聞くだけでなく自分でやってみることも大切です．
-{\sffamily\bfseries 積極性・主体性}を重視します．{\sffamily\bfseries 2年次生のうちから先輩の卒業研究を引き継ぎ，改善したものを学外で発表して受賞した先輩たち}もいます．ぜひチャレンジしてください．
+研究室に配属が決まったら，遠慮せずに研究室に来てください（ウィズ・コロナ体制では
+基本的にオンラインミーティングですが参加を歓迎します．
+希望者に接続情報をお知らせします）．
+先輩の様子を見て，話を聞いてみてください．卒業研究において必要なものは何か，
+考えてください．見る・聞くだけでなく自分でやってみることも大切です．
+\emph{積極性・主体性}を重視します．\emph{2年次生のうちから先輩の卒業研究を引き継ぎ，改善したものを学外で発表して受賞した先輩たち}もいます．ぜひチャレンジしてください．
 \vspace{-.3cm}
 \subsection*{3年次生}
 \vspace{-.3cm}
@@ -132,33 +126,41 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
   \item 必修科目ジョイントリサーチで，卒業研究に必要な知識・技術・姿勢を身に付けます．
   \item 最新技術は日々更新されます．新しい技術を活用するには専門知識も重要ですが，基礎力を鍛えることを優先してください．
 \end{itemize}
-\vspace{-.3cm}
+\vspace{-.6cm}
 \subsection*{4年次生}
 \vspace{-.3cm}
 \begin{itemize}
-  \item 春学期：研究計画書（初稿6月初旬，最終稿7月初旬）
-  \item 秋学期：卒業論文（初稿11月中旬，最終稿12月初旬），試問会（1月下旬）
+  \item 春学期：研究計画書（初稿6月初旬，最終稿7月初旬），コロキアム発表練習
+  \item 秋学期：コロキアム発表，卒業論文（初稿11月初旬，最終稿12月初旬），試問会（1月下旬）
 \end{itemize}
+
+\section{研究室配属希望者のための面接}
+
+\begin{itemize}
+  \item まず電子メールでアポイントメントをとってください．
+    少なくとも最初の一通目は，面識のない相手に送るビジネス文書の
+    つもりで書いてみてください．
+    メールには日程調整を円滑に行うために必要な情報を含めてください．
+  \item アポイントメントがとれたら面接までに以下の準備をしてください．
+    \begin{itemize}
+      \item カメラ・マイク・ヘッドフォン（イヤフォン）の準備
+      \item zoom ソフトウェアのインストール・更新，接続テスト
+      \item 「教員コンタクト確認システム」で確認申請（システムの利用方法は学部ホームページを参照）
+      \item 成績が確認できるもの（成績表の単位数欄のスクリーンショットなど）
+    \end{itemize}
+  \item 面接中に教員コンタクト申請を「承認」します．
+  \item 教員コンタクト時に確認する課題の内容：「卒業研究に対する意欲，準備状況 (これまでに学習したこと)，今後の計画 (これから学習したいこと)，最近注目している技術・ニュース，読んだ本などについて考えをまとめる」
+\end{itemize}
+
 \section{配属希望者へのメッセージ}
 
 「必要であれば何でもやってみる」気持ちで広く勉強をしてください．その上で，ここが重要だというところは，とことん深く掘り下げてください．理解した「つもり」は危険です．
-\begin{itemize}
-  \item 研究対象への深い興味
-  \item 研究の遂行に必要な知識を探し求める姿勢
-  \item 卒業研究に真剣に取り組む誠実さ
-  \item 日常生活を楽しめる前向きな姿勢
-\end{itemize}
+いまはできないこと，分からないことであっても，日々の努力の積み重ねで乗り越えて，
+できること，分かることを貪欲に広げましょう。
 
-新カリキュラムになり，かつ，配属人数が増えていることもあり，今後の研究室運営体制は大きく変わるかもしれません．
-そうであっても，真剣に研究をしている人を力の限り応援します．
-
-\section{面接}
-
-\begin{itemize}
-  \item メールでアポイント (9 月中を推奨) をとったうえで{\bfseries 研究室訪問}や{\bfseries 教員面談}に参加してください．
-  \item 教員コンタクト（面談）が必須です．成績表・課題を持参してください．また，課題についても面談時に確認しますので準備をしておいてください．
-  \item 教員コンタクト時に確認する課題の内容：「卒業研究に対する意欲，準備状況 (これまでに学習したこと)，今後の計画 (これから学習したいこと)，最近注目している技術・ニュース，読んだ本などについて考えをまとめる」
-\end{itemize}
+「研究対象への深い興味」「研究の遂行に必要な知識を探し求める姿勢」
+「卒業研究に真剣に取り組む誠実さ」「日常生活を楽しめる前向きな姿勢」
+を備えた人を募集します。真剣に研究をしたい人を力の限り応援します．
 
 最後に，最も重要なことはマッチングです．面談での受け答えを重視します．とはいえ緊張し過ぎて自分を出せないのも困ります．自信を持ってあなたのことを十分に説明してください．
 
