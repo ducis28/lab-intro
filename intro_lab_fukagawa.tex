@@ -1,35 +1,55 @@
-\documentclass[uplatex,jis2004,a4paper,11pt]{jsarticle}
-\usepackage[deluxe]{otf}
+\documentclass[paper=a4paper,fontsize=10.4pt]{jlreq}
 
 %%% 余白設定
 %\usepackage[top=3cm, bottom=3cm, left=2cm, right=2cm]{geometry}
 \usepackage[driver=dvipdfm,truedimen]{geometry}
-\geometry{left=15truemm,right=15truemm,top=15truemm,bottom=20truemm}
+\geometry{left=15truemm,right=15truemm,top=12truemm,bottom=12truemm}
 
 %%% フォント設定
-\usepackage[alphabet,unicode]{pxchfon}
-\setminchofont[0]{UDDigiKyokashoN-R.ttc}% UDデジタル教科書体N-R
-\setboldminchofont[0]{UDDigiKyokashoN-B.ttc}% UDデジタル教科書体N-B
+\usepackage{luatexja-fontspec}
+\setmainjfont{UDDigiKyokashoNP-R}[BoldFont=UDDigiKyokashoNP-B,YokoFeatures={JFM=jlreq},TateFeatures={JFM=jlreqv}]
+\setmainfont{UDDigiKyokashoNP-R}[BoldFont=UDDigiKyokashoNP-B]
 
 \usepackage{amssymb,amsmath}
 %\usepackage[dvipdfmx,hidelinks]{hyperref}
 \usepackage{hyperref}
+\usepackage{tikz}
+
+%%% 枠囲み
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
 
 \usepackage{enumitem}
 \setlist{leftmargin=5mm}
-\renewcommand{\labelitemi}{$\triangleright$}
-\renewcommand{\labelitemii}{$\blacktriangleright$}
+\renewcommand{\labelitemi}{$\triangleright$~}
+\renewcommand{\labelitemii}{$\blacktriangleright$~}
 
 \usepackage{multicol}
 
 %%% section のフォント設定
-\usepackage{titlesec}
-\titleformat{\section}{\Large\bfseries}
-  {\thesection}{1em}
-  {}
-  [\titlerule]
-\titleformat*{\subsection}{\Large\bfseries}
-\titleformat*{\subsubsection}{\large\bfseries}
+%\usepackage{titlesec}
+%\titleformat{\section}{\Large\bfseries}
+%  {\thesection}{1em}
+%  {}
+%  [\titlerule]
+%\titleformat*{\subsection}{\Large\bfseries}
+%\titleformat*{\subsubsection}{\large\bfseries}
+\ModifyHeading{section}{%
+  font={\Large\bfseries},
+  format={%
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (0,0);
+      \fill[black!50] (0,-4pt) rectangle (8pt,12pt);
+      \draw[black!50,line width=1pt] (0,-4pt) -- (\linewidth,-4pt);
+    \end{tikzpicture}%
+    \hspace{1\zw}#1#2
+  },
+  before_lines=0,
+  %lines=2,
+  after_lines=-.5,
+}
+\ModifyHeading{subsection}{font={\Large\bfseries},before_lines=0,after_lines=0}
+\ModifyHeading{subsubsection}{font={\small\bfseries},before_lines=0,after_lines=.5}
 
 \renewcommand{\emph}[1]{\textbf{#1}}
 
@@ -45,7 +65,7 @@
 
 \begin{minipage}[t]{.45\textwidth}
 \noindent
-{\LARGE\bfseries\rmfamily {\Huge㉘} 計算情報学研究室}\\
+{\LARGE\bfseries\rmfamily {\Huge ㉘} 計算情報学研究室}\\
 \hspace{.4cm} Computational Informatics Laboratory
 \end{minipage}
 \begin{minipage}[t]{.45\textwidth}
@@ -72,12 +92,34 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
 卒業研究のテーマは，配属後なるべく自分自身で考えてもらいます。ただし何でもありではなく，教員とディスカッションを重ね，取り組むに値するかどうかを吟味して決定します。その過程において，しっかりと先行研究を調査してください。教員から批判的な意見も投げかけますので，やりたいこと・考えたこと・調べたことをきちんと説明してください。ここで手を抜くと後で苦労した挙句に行き詰まり，泣く泣くテーマを変えるということになりかねません。テーマの種を見極める作業は意外と重要です。
 教員自身が抱えているテーマが自分の興味にマッチしていれば，それを選んでいただくこともオススメです。教員はモチベーションが上がります。ただし実際に卒業研究を行う皆さんにとってのモチベーションがないとお互いに困ります。
 
-\subsection*{過去の卒業研究題目（過去4期分）}
-\vspace{-.5cm}
+\begin{tcolorbox}[
+colframe=gray, colback=white,
+coltitle=white, colbacktitle=gray,
+boxrule=0.8pt, arc=0mm,
+outer arc=0mm,
+sharp corners,
+fonttitle=\bfseries,
+enhanced,
+attach boxed title to top left={xshift=5mm,yshift=-3mm},
+boxed title style={frame hidden},
+title=過去の卒業研究題目（過去4期分）
+]
+%\vspace{-.5cm}
 \begin{multicols}{2}
-{\fontsize{9pt}{0mm}\selectfont
+\fontsize{8bp}{11pt}\selectfont
+\subsubsection*{2023年度}
+\begin{itemize}[leftmargin=3mm]
+  \item 遺伝的アルゴリズムを用いた文字ジグソーパズルの解法
+  \item 選好順序の偏りを考慮した研究室配属のシミュレーション
+  \item Sentence-BERTを用いた商品データのカテゴリー分類
+  \item スポーツ動画における得点シーンの自動推定
+  \item ぷよぷよの戦術についての統計的分析 －中盤戦に着目して－
+  \item ゴールデンステート・ウォリアーズがNBA全体に与えた影響の考察
+  \item 楽天市場サイトにおける商品の使用感の自動抽出
+  \item Pongにおけるエージェントの生物的制約を加えた人間らしさの獲得
+\end{itemize}
 \subsubsection*{2022年度}
-\begin{itemize}
+\begin{itemize}[leftmargin=3mm]
   \item チャンツを用いた英語リズム習得---英語習熟度とリズム感が学習効果に及ぼす影響---
   \item ハンドクラフト特徴量を考慮したファッションアイテムの類似度判定方法
   \item 複数の画像変換を組み合わせた複雑背景物体検出
@@ -85,16 +127,14 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
   \item 音楽のBPMの違いが集中力へ与える影響---作業前の聴取に着目して---
   \item 阪神高速11号池田線における交通流の特徴分析および渋滞対策の検討
 \end{itemize}
-\vspace{-5mm}
 \subsubsection*{2021年度}
-\begin{itemize}
+\begin{itemize}[leftmargin=3mm]
   \item 過去の着手をLSTMにより考慮するガイスターの駒色推定手法について
   \item 学生の履修履歴とシラバスに基づく履修選択支援システム
   \item Pommermanにおける協働設定が強化学習エージェントに与える影響について
 \end{itemize}
-\vspace{-5mm}
 \subsubsection*{2020年度}
-\begin{itemize}
+\begin{itemize}[leftmargin=3mm]
   \item プロ野球における外国人選手の役割---日本野球機構成績データを通して---
   \item インタラクティブ制約付きクラスタリングにおける初期クラスタ精度の影響について
   \item ジャンルごとに頻出するbigramを考慮した古典籍の文字認識
@@ -111,16 +151,8 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
   \item 暗記学習における絵カルタの有用性
   \item シャーロック・ホームズシリーズの物語パターン抽出
 \end{itemize}
-\vspace{-5mm}
-\subsubsection*{2019年度}
-\begin{itemize}
-  \item 簡易宿所の戦略構築を支援するユーザレビュー分析におけるLDAの利用
-  \item 機械学習におけるOptimizerのAccuracyの比較分析
-  \item CNNとLSTMによる増減の2値分類予測の精度比較―為替データを用いて― 
-\end{itemize}
-\vspace{-.4cm}
-}
 \end{multicols}
+\end{tcolorbox}
 
 \clearpage
 \section{卒業研究の進め方}
@@ -129,33 +161,32 @@ e-mail: & \texttt{dfukagaw@mail.doshisha.ac.jp} \\
 方向性や進捗を確認できるよう，\emph{全体ミーティング（毎週）}と\emph{個別ミーティング（随時）}を活用してください。
 人数が少ない年度は個別ミーティング中心，人数が多い年度は全体ミーティング中心となります。
 たとえば2020年度は卒研生を3つのゼミ（アルゴリズム，機械学習，情報システム）に分割してゼミ単位でミーティングを行いました。
-2021～2023年度は週2回の全体ミーティング中心です。
-週4コマのゼミの中でプログラミング勉強会も実施しています。
+2021～2024年度は週2回の全体ミーティング中心です。
+週4コマのゼミの中で勉強会（プログラミング，機械学習等）も実施しています。
 
-研究室に配属が決まったら，遠慮せずに研究室に来てください。
+研究室に配属が決まったら遠慮せずに研究室に来てください。
 ゼミ・勉強会に参加することも可能です。
-先輩の様子を見て，話を聞いてみてください。卒業研究において必要なものは何か，考えてください。
+先輩の様子を見て話を聞いてみてください。卒業研究において必要なものは何か，考えてください。
 見る・聞くだけでなく自分でやってみることも大切です。
 \emph{積極性・主体性}を重視します。\emph{2年次生のうちから先輩の卒業研究を引き継ぎ，改善したものを学外で発表して受賞した先輩たち}もいます。ぜひチャレンジしてください。
-\vspace{-.3cm}
+
 \subsection*{3年次生}
-\vspace{-.3cm}
-\begin{itemize}
+\vspace{-.2cm}
+\begin{itemize}[topsep=0pt]
   \item 必修科目ジョイントリサーチで，卒業研究に必要な知識・技術・姿勢を身に付けます。
-  \item 最新技術は日々更新されます。最新の専門知識も重要ですが，まずは基礎力を鍛えることを優先してください。
+  \item 日々更新される最新技術・専門知識も重要ですが，まずは基礎力を鍛えることを優先してください。
 \end{itemize}
-\vspace{-.6cm}
+
 \subsection*{4年次生}
-\vspace{-.3cm}
-\begin{itemize}
+\begin{itemize}[topsep=0pt]
   \item 春学期：期末レポート（初稿6月初旬，最終稿7月初旬），コロキアム発表練習
   \item 秋学期：コロキアム発表，卒業論文（初稿10月下旬，最終稿11月下旬），試問会（1月下旬）
 \end{itemize}
 
 \section{教員コンタクト（配属希望者のための面接）}
 
-\begin{itemize}
-  \item 詳しい日程等は，学部全体・コース全体の研究室配属関連資料（e-class）を参照してください。
+\begin{itemize}[topsep=0pt]
+  \item 詳しい日程等は，学部全体・コース全体の研究室配属関連資料を参照してください。
   \item まず電子メールでアポイントメントをとってください。
     少なくとも一通目は，面識のない相手に送るビジネス文書のつもりで書いてみてください（その能力があることを見せてください）。
     メールには日程調整を円滑に行うために必要な情報を含めてください。
